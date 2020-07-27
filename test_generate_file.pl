@@ -4,6 +4,8 @@ use warnings;
 use CAM::PDF;
 use Time::Piece;
 
+# This template can be used for filling out PDF fillable fields given information. 
+
 sub generate_new_file {
     my $name = shift;
     my $guildid = shift;
