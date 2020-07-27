@@ -7,10 +7,12 @@ use Email::Sender::Transport::SMTP;
 use IO::All;
 use Email::Simple::Creator ();
 
+# This template can be used for sending anyone an email with a PDF attachment. The current configurations are set for a GMAIL sender.
+
 my $smtpserver = 'smtp.gmail.com';
 my $smtpport = 587;
-my $smtpuser   = '@gmail.com';
-my $smtppassword = '';
+my $smtpuser   = '@gmail.com'; # Put in gmail username here
+my $smtppassword = ''; # Put in gmail password here
 
 my $transport = Email::Sender::Transport::SMTP->new({
   host => $smtpserver,
@@ -21,6 +23,8 @@ my $transport = Email::Sender::Transport::SMTP->new({
   debug => 0,
 });
 
+# filename is the path to the file you want to attach and send via email
+# second attachment is the main body of the email. Put in whatever you want
 sub send_email {
     my $filename = shift;
     my $rec = shift;
@@ -30,7 +34,7 @@ sub send_email {
     my @parts = (
         Email::MIME->create(
             attributes => {
-                filename     => $filename.".pdf",
+                filename     => $filename.".pdf", 
                 content_type => "application/pdf",
                 encoding     => "base64",
                 name         => $filename.".pdf",
@@ -52,7 +56,7 @@ sub send_email {
       header_str => [
         To      =>  $rec,
         From    => '@gmail.com',
-        Subject => 'Due Notification for '.$quarter,
+        Subject => 'Due Notification for '.$quarter, # change subject here
       ],
       parts     => [ @parts ],
     );
