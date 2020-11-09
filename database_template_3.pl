@@ -26,8 +26,6 @@ die $@ if $@;
 my $i = 0;
 open (OUT, ">$out_file") or die "$out_file: $!";
 while (my @row = $sth->fetchrow_array()) {
-	$row[12] =~ s/\r/ /g; # Strip command
-	$row[12] =~ s/\n/ /g;
 	print OUT join('|', @row), "\n";
 	$i++;
 }
