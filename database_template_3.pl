@@ -6,9 +6,9 @@ use open ':std', ':encoding(UTF-8)';
 # This template is for getting data from a database and saving it into a file
 
 my $out_file = ""; # Output file path here
-my $cls_dbi = "dbi:Pg:dbname=;host=";
-my $cls_username = "";
-my $cls_password = "";
+my $cls_dbi = "dbi:Pg:dbname=;host="; # Put DB name and Host here
+my $cls_username = ""; # Put username here
+my $cls_password = ""; # Put password here
 my $TEMPLATE;
 my $AC = 1; # auto-commit for dbh
 
@@ -33,6 +33,12 @@ close(OUT);
 $sth->finish();
 $dbh->disconnect();
 print STDERR localtime(). ": $i records exported.\n";
+
+# Template is the expected format of the data being read in/out
+# Example
+# $TEMPLATE = "A12 name 
+#	       A250 age"
+# 12 characters long for name - 250 characters long for age
 
 BEGIN {
 $TEMPLATE = "";
